@@ -4,6 +4,7 @@ import { Search as SearchIcon } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { useHome } from "@/context/HomeContext";
 import GridViewIcon from '@mui/icons-material/GridView';
+import CloseIcon from "@mui/icons-material/Close";
 
 export const Navbar = ({ showSearch = false }) => {
   const navigate = useNavigate();
@@ -25,20 +26,21 @@ export const Navbar = ({ showSearch = false }) => {
           </Box>
 
           {showSearch && (
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1, px: 1.5,
-                height: "42px", width: { xs: "100%", sm: "300px", md: "420px" },
-                borderRadius: "10px", border: "1px solid #e5e7eb",
-                background: "#f9fafb", transition: "all 0.25s ease",
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1, px: 1.5, height: "42px",
+                width: { xs: "100%", sm: "300px", md: "420px" }, borderRadius: "10px",
+                border: "1px solid #e5e7eb", background: "#f9fafb", transition: "all 0.25s ease",
                 "&:hover": { background: "#f3f4f6" },
-                "&:focus-within": { background: "#fff", borderColor: "#000" },
-              }}>
+                "&:focus-within": { background: "#fff", borderColor: "#000" } }}>
               <SearchIcon sx={{ fontSize: 18, color: "#9ca3af" }} />
-
+            
               <InputBase placeholder="Search catalog..." value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 sx={{ flex: 1, fontSize: "0.875rem", color: "#000",
-                  "& input::placeholder": { color: "#9ca3af" },
-                }} />
+                  "& input::placeholder": { color: "#9ca3af" } }} />
+
+              {searchQuery && (
+                <CloseIcon onClick={() => setSearchQuery("")} sx={{
+                  fontSize: 18, color: "#000", cursor: "pointer" }} /> )}
             </Box>
           )}
         </Toolbar>
